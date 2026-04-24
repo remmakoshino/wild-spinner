@@ -11,8 +11,15 @@ export class MovementSystem {
   private readonly jumpKey: Phaser.Input.Keyboard.Key;
   private readonly dashKey: Phaser.Input.Keyboard.Key;
 
+  private readonly maxJumps = 2;
+  private readonly coyoteTimeMs = 120;
+  private readonly jumpBufferMs = 130;
+  private readonly secondJumpBoost = 90;
+
   private jumpsUsed = 0;
   private dashCooldownUntil = 0;
+  private coyoteUntil = 0;
+  private jumpBufferedUntil = 0;
 
   constructor(private readonly scene: Phaser.Scene) {
     this.cursors = this.scene.input.keyboard?.createCursorKeys() as Phaser.Types.Input.Keyboard.CursorKeys;
@@ -24,8 +31,10 @@ export class MovementSystem {
     const body = player.body as Phaser.Physics.Arcade.Body;
     if (!body) return;
 
-    if (body.blocked.down || body.touching.down) {
+    const onGround = body.blocked.down || body.touching.down;
+    if (onGround) {
       this.jumpsUsed = 0;
+      this.coyoteUntil = time + this.coyoteTimeMs;
     }
 
     let velocityX = 0;
@@ -34,9 +43,19 @@ export class MovementSystem {
     player.setVelocityX(velocityX);
 
     if (Phaser.Input.Keyboard.JustDown(this.jumpKey)) {
-      if (this.jumpsUsed < 2) {
-        player.setVelocityY(PLAYER_JUMP_VELOCITY);
-        this.jumpsUsed += 1;
+      this.jumpBufferedUntil = time + this.jumpBufferMs;
+    }
+
+    if (time <= this.jumpBufferedUntil) {
+      const canGroundJump = this.jumpsUsed === 0 && time <= this.coyoteUntil;
+      const canAirJump = this.jumpsUsed === 1;
+      if (canGroundJump || canAirJump) {
+        const jumpVelocity = canAirJump
+          ? PLAYER_JUMP_VELOCITY - this.secondJumpBoost
+          : PLAYER_JUMP_VELOCITY;
+        player.setVelocityY(Math.min(body.velocity.y, jumpVelocity));
+        this.jumpsUsed = Math.min(this.maxJumps, this.jumpsUsed + 1);
+        this.jumpBufferedUntil = 0;
       }
     }
 

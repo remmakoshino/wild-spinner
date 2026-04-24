@@ -18,6 +18,16 @@ export interface StageEnemySpawnDefinition {
   shootIntervalMs?: number;
 }
 
+export type StageCrateType = 'fruit' | 'bounce' | 'volatile';
+
+export interface StageCrateDefinition {
+  id: string;
+  type: StageCrateType;
+  x: number;
+  y: number;
+  fruitCount?: number;
+}
+
 export type StageGimmickDefinition =
   | {
       id: string;
@@ -68,6 +78,7 @@ export interface StageDefinition {
   checkpoints: number[];
   platforms: StagePlatformDefinition[];
   enemySpawns: StageEnemySpawnDefinition[];
+  crates: StageCrateDefinition[];
   gimmicks: StageGimmickDefinition[];
   finalChallenge?: {
     triggerX: number;
@@ -81,7 +92,7 @@ const STAGE_DEFINITIONS: Record<number, StageDefinition> = {
     id: 1,
     name: '密林リフト街道',
     backgroundColor: '#0f172a',
-    hint: 'Zで攻撃 / Jでパリィ / Shiftでダッシュ',
+    hint: '↑で2段ジャンプ / Zで攻撃 / Jでパリィ / Shiftでダッシュ',
     goalX: 3120,
     checkpoints: [120, 1050, 2200],
     platforms: [
@@ -101,6 +112,15 @@ const STAGE_DEFINITIONS: Record<number, StageDefinition> = {
         patrolMinX: 980,
         patrolMaxX: 1500
       }
+    ],
+    crates: [
+      { id: 'st1-crate-fruit-1', type: 'fruit', x: 240, y: 640, fruitCount: 2 },
+      { id: 'st1-crate-fruit-2', type: 'fruit', x: 292, y: 640, fruitCount: 2 },
+      { id: 'st1-crate-bounce-1', type: 'bounce', x: 520, y: 640 },
+      { id: 'st1-crate-fruit-3', type: 'fruit', x: 1400, y: 590, fruitCount: 3 },
+      { id: 'st1-crate-volatile-1', type: 'volatile', x: 1490, y: 590 },
+      { id: 'st1-crate-fruit-4', type: 'fruit', x: 2160, y: 640, fruitCount: 3 },
+      { id: 'st1-crate-bounce-2', type: 'bounce', x: 2820, y: 560 }
     ],
     gimmicks: [],
     finalChallenge: undefined
@@ -138,6 +158,13 @@ const STAGE_DEFINITIONS: Record<number, StageDefinition> = {
         speed: 0,
         shootIntervalMs: 1450
       }
+    ],
+    crates: [
+      { id: 'st2-crate-fruit-1', type: 'fruit', x: 350, y: 650, fruitCount: 3 },
+      { id: 'st2-crate-bounce-1', type: 'bounce', x: 980, y: 570 },
+      { id: 'st2-crate-volatile-1', type: 'volatile', x: 1620, y: 650 },
+      { id: 'st2-crate-fruit-2', type: 'fruit', x: 2520, y: 570, fruitCount: 3 },
+      { id: 'st2-crate-fruit-3', type: 'fruit', x: 2610, y: 570, fruitCount: 2 }
     ],
     gimmicks: [
       {
@@ -206,6 +233,14 @@ const STAGE_DEFINITIONS: Record<number, StageDefinition> = {
         speed: 0,
         shootIntervalMs: 1250
       }
+    ],
+    crates: [
+      { id: 'st3-crate-fruit-1', type: 'fruit', x: 370, y: 650, fruitCount: 3 },
+      { id: 'st3-crate-bounce-1', type: 'bounce', x: 1260, y: 610 },
+      { id: 'st3-crate-volatile-1', type: 'volatile', x: 1760, y: 610 },
+      { id: 'st3-crate-fruit-2', type: 'fruit', x: 2240, y: 650, fruitCount: 4 },
+      { id: 'st3-crate-fruit-3', type: 'fruit', x: 2920, y: 590, fruitCount: 3 },
+      { id: 'st3-crate-volatile-2', type: 'volatile', x: 2990, y: 590 }
     ],
     gimmicks: [
       {

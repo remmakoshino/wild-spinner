@@ -7,6 +7,7 @@ describe('stage definitions', () => {
     const stage2 = getStageDefinition(2);
     expect(stage2.gimmicks.some((g) => g.type === 'turbine-zone')).toBe(true);
     expect(stage2.gimmicks.some((g) => g.type === 'moving-platform')).toBe(true);
+    expect(stage2.crates.some((c) => c.type === 'bounce')).toBe(true);
 
     const variants = new Set(stage2.enemySpawns.map((e) => e.variant));
     expect(variants.has('charger')).toBe(true);
@@ -21,6 +22,8 @@ describe('stage definitions', () => {
     const variants = new Set(stage3.enemySpawns.map((e) => e.variant));
     expect(variants.has('support')).toBe(true);
     expect(variants.has('shooter')).toBe(true);
+
+    expect(stage3.crates.some((c) => c.type === 'volatile')).toBe(true);
 
     expect(stage3.finalChallenge).toBeDefined();
     expect(stage3.finalChallenge?.reinforcements.length).toBeGreaterThanOrEqual(2);

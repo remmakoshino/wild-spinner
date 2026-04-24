@@ -9,6 +9,9 @@ export interface HudState {
   message: string;
   enemiesLeft: number;
   stageLabel: string;
+  fruits: number;
+  cratesBroken: number;
+  cratesTotal: number;
 }
 
 export class HUD {
@@ -33,7 +36,7 @@ export class HUD {
 
   update(state: HudState): void {
     this.statsText.setText(
-      `${state.stageLabel}  HP ${state.hp}/${state.maxHp}  TIER ${state.tier}  COMBO ${state.comboRank}  ENEMY ${state.enemiesLeft}  BGM ${state.section}`
+      `${state.stageLabel}  HP ${state.hp}/${state.maxHp}  TIER ${state.tier}  COMBO ${state.comboRank}  ENEMY ${state.enemiesLeft}  FRUIT ${state.fruits}  CRATE ${state.cratesBroken}/${state.cratesTotal}  BGM ${state.section}`
     );
     this.messageText.setText(state.message);
   }

@@ -5,6 +5,9 @@ interface ResultData {
   clearTimeMs: number;
   tierBefore: number;
   tierAfter: number;
+  fruitsCollected?: number;
+  cratesBroken?: number;
+  cratesTotal?: number;
 }
 
 export class ResultScene extends Phaser.Scene {
@@ -37,7 +40,17 @@ export class ResultScene extends Phaser.Scene {
       color: '#93c5fd'
     }).setOrigin(0.5);
 
-    this.add.text(width * 0.5, height * 0.70, 'ENTERでステージ選択へ', {
+    this.add.text(
+      width * 0.5,
+      height * 0.63,
+      `フルーツ: ${data.fruitsCollected ?? 0}  クレート: ${data.cratesBroken ?? 0}/${data.cratesTotal ?? 0}`,
+      {
+        fontSize: '24px',
+        color: '#bbf7d0'
+      }
+    ).setOrigin(0.5);
+
+    this.add.text(width * 0.5, height * 0.74, 'ENTERでステージ選択へ', {
       fontSize: '24px',
       color: '#fde68a'
     }).setOrigin(0.5);
