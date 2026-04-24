@@ -1,0 +1,29 @@
+{
+  "name": "wild-spinner",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint \"src/**/*.ts\" \"tests/**/*.ts\" \"scripts/**/*.mjs\"",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "build": "npm run typecheck && vite build",
+    "preview": "vite preview",
+    "preview:check": "node scripts/preview-check.mjs",
+    "cli:debug": "npm run typecheck && npm run lint && npm run test && npm run build && npm run preview:check"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "eslint": "^9.39.1",
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.46.2",
+    "vite": "^8.0.10",
+    "vitest": "^4.0.7"
+  },
+  "dependencies": {
+    "phaser": "^3.90.0",
+    "tone": "^14.9.17"
+  }
+}
