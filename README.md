@@ -3,6 +3,28 @@
 Phaser 3 + TypeScript + Tone.js で制作している、ブラウザ向け高速アクションゲームの開発リポジトリです。  
 3Dプラットフォーマーの手触りを意識しつつ、実装は WebGL + Arcade Physics をベースにしたオリジナル構成です。
 
+## スクリーンショット
+
+### タイトル画面
+
+![タイトル画面](public/media/screenshot-title.png)
+
+### ゲームプレイ画面
+
+![ゲームプレイ画面](public/media/screenshot-gameplay.png)
+
+## プレイ動画
+
+- MP4: [play-demo.mp4](public/media/play-demo.mp4)
+
+## 更新履歴 (抜粋)
+
+| 日付 | 変更概要 |
+|---|---|
+| 2026-04-24 | README を全面拡充 (技術スタック、操作、デバッグ、CI/CD、トラブルシュート) |
+| 2026-04-24 | Stage 2/3 再入場停止バグを修正 (`StageScene` のランタイム初期化) |
+| 2026-04-24 | クレート/フルーツ収集ループと結果画面連携を追加 |
+
 ## 公開URL
 
 - GitHub Pages: https://remmakoshino.github.io/wild-spinner/
