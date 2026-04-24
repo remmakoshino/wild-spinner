@@ -129,6 +129,7 @@ export class StageScene extends Phaser.Scene {
   create(data: StageSceneData): void {
     this.stageId = data.stageId ?? 1;
     this.stageDefinition = getStageDefinition(this.stageId);
+    this.resetStageRuntime();
 
     this.saveData = loadSaveData();
     this.tier = this.saveData.difficulty.threatTier;
@@ -217,6 +218,28 @@ export class StageScene extends Phaser.Scene {
     this.currentBgmSection = 'explore';
 
     this.showMessage(`開始: ${this.stageDefinition.name}`);
+  }
+
+  private resetStageRuntime(): void {
+    this.enemies = [];
+    this.movingPlatforms = [];
+    this.turbineZones = [];
+    this.freezeZones = [];
+    this.crumblePlatforms = [];
+    this.crates = [];
+
+    this.finished = false;
+    this.goalUnlocked = true;
+    this.finalChallengeTriggered = false;
+    this.finalChallengeCleared = false;
+    this.fruitsCollected = 0;
+    this.cratesBroken = 0;
+    this.totalCrates = 0;
+
+    this.nextContactDamageAt = 0;
+    this.currentBgmSection = 'explore';
+    this.message = '';
+    this.messageUntil = 0;
   }
 
   update(time: number): void {
